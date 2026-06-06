@@ -1,10 +1,16 @@
-from flask import Flask
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    return "Hello EMS"
+employees = ["archana","rahul", "priya"]
 
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route("/", methods=["GET","POST"])
+def home():
+    
+    if request.method=="POST":
+        new_employee= request.form["employee_name"]
+        employees.append(new_employee)
+    return render_template("index.html", employees=employees)
+
+app.run(debug=True)
+
