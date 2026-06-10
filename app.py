@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from models import db, Employee
+from models import Product
 
 app = Flask(__name__)
 
@@ -10,7 +11,6 @@ db.init_app(app)
 
 with app.app_context():
     db.create_all()
-
 
 @app.route("/")
 def home():
@@ -88,7 +88,80 @@ def edit_employee(id):
 )
 
 
-app.run(debug=True)
+
+@app.route("/add_product", methods=["GET", "POST"])
+def add_product():
+
+    if request.method == "POST":
+
+        product_name = request.form["product_name"]
+        category = request.form["category"]
+        quantity = request.form["quantity"]
+        price = request.form["price"]
+        supplier = request.form["supplier"]
+
+        new_product = Product(
+            name=product_name,
+            category=category,
+            quantity=quantity,
+            price=price,
+            supplier=supplier
+        )
+
+        db.session.add(new_product)
+        db.session.commit()
+
+        return redirect("/products")
+
+    return render_template("add_product.html")
+
+@app.route("/products")
+def products():
+
+    products = Product.query.all()
+
+    return render_template(
+        "products.html",
+        products=products
+    )
+
+@app.route("/delete_product/<int:id>")
+def delete_product(id):
+
+    product = Product.query.get(id)
+
+    db.session.delete(product)
+
+    db.session.commit()
+
+    return redirect("/products")
+
+
+@app.route("/edit_product/<int:id>", methods=["GET", "POST"])
+def edit_product(id):
+
+    product = Product.query.get(id)
+
+    if request.method == "POST":
+
+        product.name = request.form["product_name"]
+        product.category = request.form["category"]
+        product.quantity = request.form["quantity"]
+        product.price = request.form["price"]
+        product.supplier = request.form["supplier"]
+
+        db.session.commit()
+
+        return redirect("/products")
+
+    return render_template(
+        "edit_product.html",
+        product=product
+    )
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
 
 
 
