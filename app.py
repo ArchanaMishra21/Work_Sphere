@@ -12,9 +12,18 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+
 @app.route("/")
 def home():
-    return render_template("home.html")
+
+    employee_count = Employee.query.count()
+    product_count = Product.query.count()
+
+    return render_template(
+        "home.html",
+        employee_count=employee_count,
+        product_count=product_count
+    )
 
 
 @app.route("/add_employee", methods=["GET", "POST"])
@@ -45,11 +54,19 @@ def add_employee():
 @app.route("/employees")
 def employees():
 
-    employees = Employee.query.all()
+    search = request.args.get("search", "")
+
+    if search:
+        employees = Employee.query.filter(
+            Employee.name.contains(search)
+        ).all()
+    else:
+        employees = Employee.query.all()
 
     return render_template(
         "employee.html",
-        employees=employees
+        employees=employees,
+        search=search
     )
 
 @app.route("/delete_employee/<int:id>")
@@ -115,14 +132,23 @@ def add_product():
 
     return render_template("add_product.html")
 
+
 @app.route("/products")
 def products():
 
-    products = Product.query.all()
+    search = request.args.get("search", "")
+
+    if search:
+        products = Product.query.filter(
+            Product.name.contains(search)
+        ).all()
+    else:
+        products = Product.query.all()
 
     return render_template(
         "products.html",
-        products=products
+        products=products,
+        search=search
     )
 
 @app.route("/delete_product/<int:id>")

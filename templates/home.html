@@ -1,141 +1,127 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
 
-    <title>WorkSphere</title>
+```
+<title>WorkSphere</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+```
 
 </head>
 
 <body style="background: linear-gradient(to right, #e3f2fd, #ffffff);">
 
-    <!-- Navbar -->
+```
+<!-- Navbar -->
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
-        <div class="container">
+    <div class="container">
 
-            <a class="navbar-brand" href="/">
-                WorkSphere
+        <a class="navbar-brand fw-bold" href="/">
+            WorkSphere
+        </a>
+
+        <div>
+
+            <a href="/" class="btn btn-light me-2">
+                Home
             </a>
 
-            <div>
+            <a href="/add_employee" class="btn btn-light me-2">
+                Add Employee
+            </a>
 
-                <a href="/" class="btn btn-light me-2">
-                    Home
-                </a>
+            <a href="/employees" class="btn btn-light me-2">
+                Employees
+            </a>
 
-                <a href="/add_employee" class="btn btn-light me-2">
-                    Add Employee
-                </a>
+            <a href="/add_product" class="btn btn-light me-2">
+                Add Product
+            </a>
 
-                <a href="/employees" class="btn btn-light">
-                    Employees
-                </a>
+            <a href="/products" class="btn btn-light">
+                Products
+            </a>
 
-                <a href="/add_product" class="btn btn-light">
-                    Add Product
-                </a>
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- Hero Section -->
+
+<div class="container text-center mt-5">
+
+    <h1 class="display-3 fw-bold">
+        WorkSphere
+    </h1>
+
+    <p class="lead">
+        Enterprise Management System
+    </p>
+
+    <p>
+        Manage Employees, Inventory, Sales and Business Operations Efficiently.
+    </p>
+
+    <a href="/add_employee" class="btn btn-primary btn-lg m-2">
+        Add Employee
+    </a>
+
+    <a href="/employees" class="btn btn-success btn-lg m-2">
+        View Employees
+    </a>
+
+    <a href="/products" class="btn btn-dark btn-lg m-2">
+        View Products
+    </a>
+
+</div>
+
+<!-- Dashboard Statistics -->
+
+<div class="container mt-5">
+
+    <div class="row text-center">
+
+        <div class="col-md-6 mb-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body">
+
+                    <h3>
+                        👥 Total Employees
+                    </h3>
+
+                    <h1 class="display-4 text-primary">
+                        {{ employee_count }}
+                    </h1>
+
+                </div>
 
             </div>
 
         </div>
 
-    </nav>
+        <div class="col-md-6 mb-3">
 
-    <!-- Hero Section -->
+            <div class="card shadow border-0">
 
-    <div class="container text-center mt-5">
+                <div class="card-body">
 
-        <h1 class="display-3 fw-bold">
-            WorkSphere
-        </h1>
+                    <h3>
+                        📦 Total Products
+                    </h3>
 
-        <p class="lead">
-            Enterprise Management System
-        </p>
-
-        <p>
-            Manage Employees, Inventory, Sales and Business Operations Efficiently.
-        </p>
-
-        <a href="/add_employee" class="btn btn-primary btn-lg m-2">
-            Add Employee
-        </a>
-
-        <a href="/employees" class="btn btn-success btn-lg m-2">
-            View Employees
-        </a>
-
-        <a href="/products" class="btn btn-dark btn-lg m-2">
-            View Products
-        </a>
-
-    </div>
-
-    <!-- Cards -->
-
-    <div class="container mt-5">
-
-        <div class="row">
-
-            <div class="col-md-4">
-
-                <div class="card shadow">
-
-                    <div class="card-body">
-
-                        <h3>
-                            👥 Employees
-                        </h3>
-
-                        <p>
-                            Manage employee records and information.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="card shadow">
-
-                    <div class="card-body">
-
-                        <h3>
-                            📦 Inventory
-                        </h3>
-
-                        <p>
-                            Inventory module coming soon.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="card shadow">
-
-                    <div class="card-body">
-
-                        <h3>
-                            💰 Sales
-                        </h3>
-
-                        <p>
-                            Sales module coming soon.
-                        </p>
-
-                    </div>
+                    <h1 class="display-4 text-success">
+                        {{ product_count }}
+                    </h1>
 
                 </div>
 
@@ -144,6 +130,91 @@
         </div>
 
     </div>
+
+</div>
+
+<!-- Feature Cards -->
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h3>
+                        👥 Employees
+                    </h3>
+
+                    <p>
+                        Manage employee records and information.
+                    </p>
+
+                    <a href="/employees" class="btn btn-primary">
+                        Open Employees
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h3>
+                        📦 Inventory
+                    </h3>
+
+                    <p>
+                        Manage products, stock and suppliers.
+                    </p>
+
+                    <a href="/products" class="btn btn-dark">
+                        Open Inventory
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h3>
+                        💰 Sales
+                    </h3>
+
+                    <p>
+                        Sales and billing module.
+                    </p>
+
+                    <button class="btn btn-secondary" disabled>
+                        Coming Soon
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+```
 
 </body>
 

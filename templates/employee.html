@@ -1,138 +1,155 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
     <title>Employees</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+```
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+```
+
 </head>
 
 <body style="background: linear-gradient(to right, #e3f2fd, #ffffff);">
 
-    <!-- Navbar -->
+```
+<!-- Navbar -->
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
-        <div class="container">
+    <div class="container">
 
-            <a class="navbar-brand" href="/">
-                WorkSphere
+        <a class="navbar-brand" href="/">
+            WorkSphere
+        </a>
+
+        <div>
+
+            <a href="/" class="btn btn-light me-2">
+                Home
             </a>
 
-            <div>
+            <a href="/add_employee" class="btn btn-light me-2">
+                Add Employee
+            </a>
 
-                <a href="/" class="btn btn-light me-2">
-                    Home
-                </a>
-
-                <a href="/add_employee" class="btn btn-light me-2">
-                    Add Employee
-                </a>
-
-                <a href="/employees" class="btn btn-light">
-                    Employees
-                </a>
-
-            </div>
-
-        </div>
-
-    </nav>
-
-    <div class="container mt-5">
-
-        <h1 class="mb-4">
-            Employee Dashboard
-        </h1>
-
-        <!-- Stats Card -->
-
-        <div class="card shadow mb-4">
-
-            <div class="card-body">
-
-                <h4>Total Employees</h4>
-
-                <h2>
-                    {{ employees|length }}
-                </h2>
-
-            </div>
-
-        </div>
-
-        <!-- Search Box -->
-
-        <div class="mb-4">
-
-            <input
-                type="text"
-                class="form-control"
-                placeholder="Search feature coming soon">
-
-        </div>
-
-        <!-- Employee Table -->
-
-        <div class="card shadow">
-
-            <div class="card-body">
-
-                <table class="table table-striped table-hover">
-
-                    <thead>
-
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Department</th>
-                            <th>Salary</th>
-                            <th>Email</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        {% for employee in employees %}
-
-                        <tr>
-
-                            <td>{{ employee.id }}</td>
-                            <td>{{ employee.name }}</td>
-                            <td>{{ employee.department }}</td>
-                            <td>₹ {{ employee.salary }}</td>
-                            <td>{{ employee.email }}</td>
-
-                            <td>
-                                <a href="/edit_employee/{{ employee.id }}"
-                                   class="btn btn-warning btn-sm">
-                                    Edit
-                                </a>
-                            </td>
-
-                            <td>
-                                <a href="/delete_employee/{{ employee.id }}"
-                                   class="btn btn-danger btn-sm">
-                                    Delete
-                                </a>
-                            </td>
-
-                        </tr>
-
-                        {% endfor %}
-
-                    </tbody>
-
-                </table>
-
-            </div>
+            <a href="/employees" class="btn btn-light">
+                Employees
+            </a>
 
         </div>
 
     </div>
+
+</nav>
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">
+        Employee Dashboard
+    </h1>
+
+    <!-- Stats Card -->
+
+    <div class="card shadow mb-4">
+
+        <div class="card-body">
+
+            <h4>Total Employees Found</h4>
+
+            <h2>
+                {{ employees|length }}
+            </h2>
+
+        </div>
+
+    </div>
+
+    <!-- Search Form -->
+
+    <form method="GET" class="mb-4">
+
+        <div class="input-group">
+
+            <input
+                type="text"
+                name="search"
+                class="form-control"
+                placeholder="Search Employee..."
+                value="{{ search }}">
+
+            <button class="btn btn-primary">
+                Search
+            </button>
+
+        </div>
+
+    </form>
+
+    <!-- Employee Table -->
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <table class="table table-striped table-hover">
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Salary</th>
+                        <th>Email</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for employee in employees %}
+
+                    <tr>
+
+                        <td>{{ employee.id }}</td>
+                        <td>{{ employee.name }}</td>
+                        <td>{{ employee.department }}</td>
+                        <td>₹ {{ employee.salary }}</td>
+                        <td>{{ employee.email }}</td>
+
+                        <td>
+                            <a href="/edit_employee/{{ employee.id }}"
+                               class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
+                        </td>
+
+                        <td>
+                            <a href="/delete_employee/{{ employee.id }}"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Delete this employee?')">
+                                Delete
+                            </a>
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+```
 
 </body>
 
