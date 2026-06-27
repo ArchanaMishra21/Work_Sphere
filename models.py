@@ -17,3 +17,10 @@ class Product(db.Model):
     quantity = db.Column(db.Integer)
     price = db.Column(db.Integer)
     supplier = db.Column(db.String(100))
+
+class Attendance(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    employee_id = db.Column(db.Integer)
+    date = db.Column(db.String(50))
+    status = db.Column(db.String(20))

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from models import db, Employee
-from models import Product
+from models import Product , Attendance
 
 app = Flask(__name__)
 
@@ -191,6 +191,81 @@ def edit_product(id):
     return render_template(
         "edit_product.html",
         product=product
+    )
+
+
+@app.route("/attendance")
+def attendance():
+
+    attendance_records = Attendance.query.all()
+    employees = Employee.query.all()
+
+    return render_template(
+        "attendance.html",
+        attendance_records=attendance_records,
+        employees=employees
+    )
+
+@app.route("/add_attendance", methods=["GET", "POST"])
+def add_attendance():
+
+    employees = Employee.query.all()
+
+    if request.method == "POST":
+
+        employee_id = request.form["employee_id"]
+        date = request.form["date"]
+        status = request.form["status"]
+
+        new_attendance = Attendance(
+            employee_id=employee_id,
+            date=date,
+            status=status
+        )
+
+        db.session.add(new_attendance)
+        db.session.commit()
+
+        return redirect("/attendance")
+
+    return render_template(
+        "add_attendance.html",
+        employees=employees
+    )
+
+@app.route("/delete_attendance/<int:id>")
+def delete_attendance(id):
+
+    record = Attendance.query.get(id)
+
+    if record:
+
+        db.session.delete(record)
+        db.session.commit()
+
+    return redirect("/attendance")
+
+@app.route("/edit_attendance/<int:id>", methods=["GET", "POST"])
+def edit_attendance(id):
+
+    record = Attendance.query.get(id)
+
+    employees = Employee.query.all()
+
+    if request.method == "POST":
+
+        record.employee_id = request.form["employee_id"]
+        record.date = request.form["date"]
+        record.status = request.form["status"]
+
+        db.session.commit()
+
+        return redirect("/attendance")
+
+    return render_template(
+        "edit_attendance.html",
+        record=record,
+        employees=employees
     )
 
 
