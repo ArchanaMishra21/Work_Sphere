@@ -19,10 +19,18 @@ def home():
     employee_count = Employee.query.count()
     product_count = Product.query.count()
 
+    low_stock_products = Product.query.filter(
+        Product.quantity <= 10
+    ).all()
+
+    low_stock_count = len(low_stock_products)
+
     return render_template(
         "home.html",
         employee_count=employee_count,
-        product_count=product_count
+        product_count=product_count,
+        low_stock_products=low_stock_products,
+        low_stock_count=low_stock_count
     )
 
 

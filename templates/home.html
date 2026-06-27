@@ -129,6 +129,76 @@
 
         </div>
 
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h3>
+                        ⚠ Low Stock
+                    </h3>
+
+                    <h1 class="display-4 text-danger">
+                        {{ low_stock_count }}
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Low Stock Alert -->
+
+<div class="container mt-4">
+
+    <div class="card shadow border-danger">
+
+        <div class="card-header bg-danger text-white">
+
+            <h4>
+                ⚠ Low Stock Alerts
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if low_stock_products %}
+
+                <ul class="list-group">
+
+                    {% for product in low_stock_products %}
+
+                    <li class="list-group-item d-flex justify-content-between">
+
+                        <strong>{{ product.name }}</strong>
+
+                        <span>
+                            Stock: {{ product.quantity }}
+                        </span>
+
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            {% else %}
+
+                <p class="text-success">
+                    All products are sufficiently stocked.
+                </p>
+
+            {% endif %}
+
+        </div>
+
     </div>
 
 </div>
